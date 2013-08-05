@@ -1,0 +1,39 @@
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="<?php echo $this->formId; ?>" method="post">
+<div class="formbody">
+<?php if ($this->message): ?>
+<p class="<?php echo $this->mclass; ?>"><?php echo $this->message; ?></p>
+<?php endif; ?>
+<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+<?php if (!$this->showChannels): ?>
+<?php foreach ($this->channels as $id=>$title): ?>
+<input type="hidden" name="channels[]" value="<?php echo $id; ?>">
+<?php endforeach; ?>
+<?php endif; ?>
+
+<label for="newMail_<?php echo $this->id; ?>"><?php echo $this->newMailLabel; ?></label>
+<input type="text" name="newMail" id="newMail_<?php echo $this->id; ?>" class="text">
+
+<label for="oldMail_<?php echo $this->id; ?>"><?php echo $this->oldMailLabel; ?></label>
+<input type="text" name="oldMail" id="oldMail_<?php echo $this->id; ?>" class="text">
+
+<?php if ($this->showChannels): ?>
+<label for="ctrl_channels_<?php echo $this->id; ?>" class="invisible"><?php echo $this->channelsLabel; ?></label>
+<div id="ctrl_channels_<?php echo $this->id; ?>" class="checkbox_container">
+<?php foreach ($this->channels as $id=>$title): ?>
+<span><input type="checkbox" name="channels[]" id="opt_<?php echo $this->id; ?>_<?php echo $id; ?>" value="<?php echo $id; ?>" class="checkbox"> <label for="opt_<?php echo $this->id; ?>_<?php echo $id; ?>"><?php echo $title; ?></label></span>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<input type="submit" name="submit" class="submit" value="<?php echo $this->submit; ?>">
+</div>
+</form>
+
+</div>
